@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" applicationDPI="160">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	
+	<fx:Script>
+		<![CDATA[
+			import com.view.LocalizationLanguage;
+			
+		
+			
+			
+			
+			/*	[Bindable]
+				private var locales:ArrayCollection = new ArrayCollection( [{label:"English (United States)", locale:"en_US"},
+											 {label:"German (Germany)", locale:"de_DE"},
+											 {label:"French (France)", locale:"fr_FR"}]);
+	*/
+				private function comboChangeHandler():void
+				{
+				   LocalizationLanguage._selectedLanguage =  [localeComboBox.selectedItem.locale];
+				     
+				}
+			
+			  protected function connection_clickHandler(event:MouseEvent):void
+			  {
+				
+				 
+		       
+				
+			  }
+
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				resourceManager.localeChain =  LocalizationLanguage._selectedLanguage;
+				
+			}
+			
+		]]>
+	</fx:Script>
+	
+	
+	
+	<fx:Metadata>
+		[ResourceBundle("resources")]
+	</fx:Metadata> 
+	
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center" verticalAlign="top" />
+	</s:layout>
+	
+	<s:Panel title="{resourceManager.getString('resources','contact.title')}" color="black"  width="450">
+		
+		<s:layout>
+			<s:VerticalLayout  paddingLeft="10" paddingRight="10" paddingTop="10" paddingBottom="10" />
+		</s:layout>
+		
+		<s:Form width="100%" color="0x323232">
+			<s:FormItem label="{resourceManager.getString('resources','contact.field.name')}">
+				<s:TextInput width="80" height="30" />
+			</s:FormItem>
+			<s:FormItem label="{resourceManager.getString('resources','contact.field.streetAddress')}">
+				<s:TextInput width="80" height="30" />
+			</s:FormItem>
+			<s:FormItem label="{resourceManager.getString('resources','contact.field.city')}">
+				<s:TextInput width="80" height="30" />
+			</s:FormItem>
+			<s:FormItem label="{resourceManager.getString('resources','contact.field.state')}">
+				<s:TextInput  width="80" height="30" />
+			</s:FormItem>
+			<s:FormItem label="{resourceManager.getString('resources','contact.field.zipCode')}">
+				<s:TextInput width="80" height="30" />
+			</s:FormItem>
+			<s:FormItem label="{resourceManager.getString('resources','contact.field.country')}">
+				<s:TextInput width="80" height="30" />
+			</s:FormItem>
+			<s:FormItem>
+				<s:Button label="{resourceManager.getString('resources','contact.submit')}" />
+			</s:FormItem>
+		</s:Form>
+	</s:Panel>
+	
+	<s:Spacer height="15" />
+	
+	<s:HGroup width="350" verticalAlign="middle">
+		<s:Spacer width="100%" />	
+		<s:Label text="Select Language :" />
+		<s:List id="localeComboBox" dataProvider="{LocalizationLanguage.locales}" change="comboChangeHandler()" height="80" borderVisible="true" />
+	</s:HGroup>
+	
+	<s:Button label="Apply" click="button1_clickHandler(event)" />
+	
+	<s:ViewNavigator id="viewContainer" top="0" bottom="0" left="0" right="0" visible="false"  >
+	</s:ViewNavigator>
+	
+
+	
+</s:Application>
